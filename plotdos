@@ -1,0 +1,9 @@
+cat DOSCAR | sed -n 7,2207p > tdos
+gnuplot
+>plot "tdos" u 1:2 w l
+
+grep E-fermi OUTCAR
+cat tdos | awk '{print $1-(E-fermi)"  "$2}' > ftdos
+
+gnuplot
+> plot "ftdos" u 1:2 w l
