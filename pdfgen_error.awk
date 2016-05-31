@@ -8,7 +8,7 @@ mkdir pdfout
 for i in $l; do
   cd lambda$i
 
-  echo 1 2 3 4 5 6 7 8 9 10 11 12 13 > no.dat
+  echo First Second Third Fourth Fifth Sixth Seventh Eighth Nineth Tenth Eleventh Twelvefth Thirteenth > no.dat
   echo "Pre_Eq_N N dUdL dUdL/N Sum(dUdL) Mean(dUd)L dUdL^2 dUdL^2/N Sum(dUdL^2) Mean(dUdL^2) Variance SD Mean-SD" > name.dat 
 
   PRE_EQ_N=$(awk '{ if (NR==3) print $3 }' INCAR)
@@ -24,7 +24,7 @@ for i in $l; do
 
 cat>plotfile<<!
 
-set term postscript
+set term pdf
 set out "../pdfout/$i$enddir.pdf"
 set title "dU/dL for lambda $i"
 set xlabel "Nth step"
@@ -44,7 +44,7 @@ dir=`pwd`
 cat>plotfile2<<!
 #set term x11
 #set term qt 0
-set term postscript
+set term pdf
 set out "pdfout/Mean$enddir$i.pdf"
 set termoption dash
 set xlabel "Nth step"
@@ -53,7 +53,7 @@ set title "Mean of dU/dL"
 plot for [i=0:9] sprintf('$dir/lambda0.%i/test.err', i) u 2:6 w l lc i lw 3 lt 1 title sprintf("Mu L=0.%i",i), "$dir/lambda1.0/test.err" u 2:6 w l lc 10 lw 3 lt 3 title "Mu L=1.0"
 
 #set term qt 1
-set term postscript 
+set term pdf
 set out "pdfout/SD$enddir$i.pdf"
 set termoption dash
 set xlabel "Nth step"
@@ -62,7 +62,7 @@ set title "Standard Deviation of dU/dL"
 plot for [i=0:9] sprintf('$dir/lambda0.%i/test.err', i) u 2:12 w l lc i lw 3 lt 1 title sprintf("SD L=0.%i",i), "$dir/lambda1.0/test.err" u 2:12 w l lc 10 lw 3 lt 3 title "SD L=1.0"
 
 #set term qt 2
-set terminal postscript 
+set terminal pdf
 set out "pdfout/Dif$enddir$i.pdf"
 set termoption dash
 set xlabel "Nth step"
