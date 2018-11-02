@@ -67,4 +67,4 @@ for i in `echo *size`; do
 done > $runTimeHr.dat
 }
 
-if [ "$1" == "show" ]; then showRMS ; else calculateRMS && showRMS ; fi
+if [ "$1" == "show" ]; then showRMS ; else if [ ! -d outFiles ]; then mkdir outFiles ; fi ; mv *.dat *.out outFiles/. ; calculateRMS && showRMS ; fi
