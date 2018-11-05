@@ -2,13 +2,15 @@
 
 dir=`pwd`
 
+vaspRunPath="/workspace/tamellan/Zr2AlC/sizeTests48ang/0a0c_vapsruns"
+
 ##Calculate RMSs for training and test sets
 function calculateRMS {
 c=0
 for i in `echo *size`; do 
   cd $i 
   if [ ! -d "testForce" ]; then mkdir testForce ; fi
-  rsync ../../0a0c_testSet_vaspruns/* testForce/.
+  rsync $vaspRunPath/* testForce/.
   cd testForce
   pwd
   mv test.fitdbse fitdbse
